@@ -12,7 +12,7 @@ using TatBlog.Data.Contexts;
 namespace TatBlog.Data.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20230227063008_InitialCreate")]
+    [Migration("20230301063123_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -164,11 +164,10 @@ namespace TatBlog.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("ViewCount")
-                        .IsRequired()
+                    b.Property<int>("ViewCount")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("0");
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 

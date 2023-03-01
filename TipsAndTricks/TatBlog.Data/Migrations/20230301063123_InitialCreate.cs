@@ -72,7 +72,7 @@ namespace TatBlog.Data.Migrations
                     Meta = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     UrlSlug = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    ViewCount = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "0"),
+                    ViewCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     Published = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     PostedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatBlog.Core.DTO;
 using TatBlog.Core.Entities;
 
 namespace TatBlog.Services.Blogs
@@ -14,9 +15,14 @@ namespace TatBlog.Services.Blogs
 			int mounth,
 			string slug,
 			CancellationToken cancellationToken = default);
-		Task<List<Post>> GetPopularArticlesAsync(
+		Task<IList<Post>> GetPopularArticlesAsync(
 			int numPosts,
 			CancellationToken cancellationToken = default);
+		Task<IList<CategoryItem>> GetCategoriesAsync(
+				bool showOnMenu = false,
+				CancellationToken cancellationToken = default);
+
+
 		Task<bool> IsPostSlugExistedAsync(
 			int postId, string slug,
 			CancellationToken cancellationToken = default);
