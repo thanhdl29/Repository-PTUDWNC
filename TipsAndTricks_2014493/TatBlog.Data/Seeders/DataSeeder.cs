@@ -45,23 +45,23 @@ namespace TatBlog.Data.Seeders
 				},
 				new()
 				{
-					FullName = "Jessica wonder",
-					UrlSlug = "jessica-wonder",
-					Email = "jessica665@motip.com",
+					FullName = "Jes won",
+					UrlSlug = "Jes won",
+					Email = "jeswon665@motip.com",
 					JoinedDate = new DateTime(2021, 5, 20)
 				},
 				new()
 				{
-					FullName = "Jessica wonder",
-					UrlSlug = "jessica-wonder",
-					Email = "jessica665@motip.com",
+					FullName = "Iron man",
+					UrlSlug = "Iron man",
+					Email = "iron122@motip.com",
 					JoinedDate = new DateTime(2022, 6, 21)
 				} ,
 				new()
 				{
-					FullName = "Jessica wonder",
-					UrlSlug = "jessica-wonder",
-					Email = "jessica665@motip.com",
+					FullName = "The flast",
+					UrlSlug = "The flast",
+					Email = "flast2112@motip.com",
 					JoinedDate = new DateTime(2023, 7, 22)
 				}
 			};
@@ -79,7 +79,12 @@ namespace TatBlog.Data.Seeders
 				new() {Name = "Architecture", Description = "Architecture", UrlSlug = "Architecture", ShowOnMenu = true},
 				new() {Name = "Messaging", Description = "Messaging", UrlSlug = "Messaging", ShowOnMenu = true},
 				new() {Name = "OOP", Description = "Object-Oriented Program", UrlSlug= "OOP",ShowOnMenu = true},
-				new() {Name = "Design Patterns", Description = "Design Patterns", UrlSlug = "Design Patterns", ShowOnMenu = true}
+				new() {Name = "Design Patterns", Description = "Design Patterns", UrlSlug = "Design Patterns", ShowOnMenu = true},
+				new() {Name = "Iron12", Description = "iron-des", UrlSlug = "ironman", ShowOnMenu = true},
+				new() {Name = "OTPP", Description = "Rap1", UrlSlug = "Rap1", ShowOnMenu = true},
+				new() {Name = "Networld", Description = ".Net World", UrlSlug = ".Net world", ShowOnMenu = true},
+				new() {Name = "Java", Description = "Core", UrlSlug = "Core", ShowOnMenu = true},
+				new() {Name = "HTML,CSS", Description = "HTML,CSS", UrlSlug = "HTML,CSS", ShowOnMenu = true}
 			};
 			_dbContext.AddRange(categories);
 			_dbContext.SaveChanges();
@@ -95,7 +100,13 @@ namespace TatBlog.Data.Seeders
 				new() {Name = "Blazor", Description = "Blazor", UrlSlug = "Blazor"},
 				new() {Name = "Deep Learning", Description = "Deep Learning", UrlSlug = "Deep Learning"},
 				new() {Name = "Neural Network", Description = "Neural Network", UrlSlug = "Neural Network"},
-				
+				new() {Name = "Google 2", Description = "Google 2", UrlSlug = "Google 2"},
+				new() {Name = "ASP .NET MVC  2", Description = "ASP .NET MVC 2", UrlSlug = "ASP .NET MVC 2"},
+				new() {Name = "Razor Page 2", Description = "Razor Page 2", UrlSlug = "Razor Page 2"},
+				new() {Name = "Blazor 2", Description = "Blazor 2", UrlSlug = "Blazor 2"},
+				new() {Name = "Deep Learning 2", Description = "Deep Learning 2", UrlSlug = "Deep Learning 2"},
+				new() {Name = "Neural Network 2", Description = "Neural Network 2", UrlSlug = "Neural Network 2"},
+
 			 };
 			_dbContext.AddRange(tags);
 			_dbContext.SaveChanges();
@@ -116,6 +127,24 @@ namespace TatBlog.Data.Seeders
 					Description = "Here's afew great Don't and Do examples",
 					Meta = "David and friends haas a great repository filled",
 					UrlSlug = "Aspnet-core-diagnostic-scenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "ASP.NET",
+					ShortDescription = "David and epos",
+					Description = "Here's afew great mples",
+					Meta = "David and epository filled",
+					UrlSlug = "Aspnetcenarios",
 					Published = true,
 					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
 					ModifiedDate = null,

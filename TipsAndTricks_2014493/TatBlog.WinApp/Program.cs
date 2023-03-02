@@ -5,14 +5,13 @@ using System;
 using TatBlog.Services.Blogs;
 using TatBlog.WinApp;
 
-
 // Tạo đối tuọngh DbContext để quản lý phiên làm việc
 // Với CSDL và trạng thái của các đối tuọng 
 var context = new BlogDbContext();
 
 IBlogRepository blogRepo = new BlogRepository(context);
 
-var pagingParams = new PagingParams
+/*var pagingParams = new PagingParams
 {
 	PageNumber = 1,
 	PageSize = 5,
@@ -26,7 +25,7 @@ foreach (var item in tagsList)
 	Console.WriteLine("{0,5}{1,-50}{2,10}",
 		 item.Id, item.Name, item.PostCount);
 
-}
+}*/
 
 //var posts = await blogRepo.GetPopularArticlesAsync(3);
 /*var categories = await blogRepo.GetCategoriesAsync();
@@ -72,3 +71,9 @@ foreach (var item in categories)
 	Console.WriteLine("".PadRight(80, '-'));
 
 }*/
+
+// Cau 1:a) Tìm một thẻ (Tag) theo tên định danh (slug)
+string slug = "Google";
+var tag = await blogRepo.FundTagBySlugAsync(slug);
+Console.WriteLine("{0,-5}{1,-20}{2,-30}", "ID", "Name", "Description");
+Console.WriteLine("{0,-5}{1,-20}{2,-30}", tag.Id, tag.Name, tag.Description);
