@@ -4,6 +4,7 @@ using TatBlog.Data.Seeders;
 using System;
 using TatBlog.Services.Blogs;
 using TatBlog.WinApp;
+using TatBlog.Core.DTO;
 
 // Tạo đối tuọngh DbContext để quản lý phiên làm việc
 // Với CSDL và trạng thái của các đối tuọng 
@@ -73,7 +74,15 @@ foreach (var item in categories)
 }*/
 
 // Cau 1:a) Tìm một thẻ (Tag) theo tên định danh (slug)
-string slug = "Google";
+/*string slug = "Google";
 var tag = await blogRepo.FundTagBySlugAsync(slug);
 Console.WriteLine("{0,-5}{1,-20}{2,-30}", "ID", "Name", "Description");
-Console.WriteLine("{0,-5}{1,-20}{2,-30}", tag.Id, tag.Name, tag.Description);
+Console.WriteLine("{0,-5}{1,-20}{2,-30}", tag.Id, tag.Name, tag.Description);*/
+//Lấy danh sách tất cả các thẻ (Tag) kèm theo số bài viết chứa thẻ đó. Kết quả trả về kiểu IList<TagItem>.
+var tags = await blogRepo.GetAllTagAsync();
+Console.WriteLine("{0,5}{1,-50}{2,10}",
+	"ID", "Name", "Count");
+foreach(var item in tags)
+{
+	Console.WriteLine("{0,5}{1,-50}{2,10}", item.Id, item.Name, item.Description);
+}

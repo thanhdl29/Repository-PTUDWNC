@@ -34,5 +34,7 @@ namespace TatBlog.Services.Blogs
 			IPagingParams pagingParams,
 			CancellationToken cancellationToken = default);
 		Task<Tag> FundTagBySlugAsync(string slug, CancellationToken cancellationToken = default);
+		Task<IList<TagItem>> GetAllTagAsync(CancellationToken cancellationToken = default);
+		
 	}
 }
