@@ -5,6 +5,7 @@ using System;
 using TatBlog.Services.Blogs;
 using TatBlog.WinApp;
 using TatBlog.Core.DTO;
+using TatBlog.Core.Entities;
 
 // Tạo đối tuọngh DbContext để quản lý phiên làm việc
 // Với CSDL và trạng thái của các đối tuọng 
@@ -79,10 +80,43 @@ var tag = await blogRepo.FundTagBySlugAsync(slug);
 Console.WriteLine("{0,-5}{1,-20}{2,-30}", "ID", "Name", "Description");
 Console.WriteLine("{0,-5}{1,-20}{2,-30}", tag.Id, tag.Name, tag.Description);*/
 //Lấy danh sách tất cả các thẻ (Tag) kèm theo số bài viết chứa thẻ đó. Kết quả trả về kiểu IList<TagItem>.
-var tags = await blogRepo.GetAllTagAsync();
+/*var tags = await blogRepo.GetAllTagAsync();
 Console.WriteLine("{0,5}{1,-50}{2,10}",
 	"ID", "Name", "Count");
 foreach(var item in tags)
 {
-	Console.WriteLine("{0,5}{1,-50}{2,10}", item.Id, item.Name, item.Description);
+	Console.WriteLine("{0,5}{1,-50}{2,10}", item.Id, item.Name, item.PostCount);
+}*/
+//Xoá 1 thẻ theo mã cho trước
+Console.WriteLine("Nhap ma the can xoa: ");
+int nhap = Convert.ToInt32(Console.ReadLine());
+var TagDelete = blogRepo.DeleteTag(nhap);
+var tags = context.Tags
+	.OrderBy(x => x.Name)
+	.Select(x => new
+	{
+		Id = x.Id,
+		Name = x.Name,
+		UrlSlug = x.UrlSlug,
+		Description = x.Description,
+		PostCount = x.Posts.Count()
+	}).ToList();
+if(tags.Count > 0)
+{
+	Console.WriteLine("Danh sách thẻ còn lại: ");
+	foreach(var tag in tags)
+	{
+		Console.WriteLine("ID           : {0}", tag.Id);
+		Console.WriteLine("Name        : {0}", tag.Name);
+		Console.WriteLine("UrlSlug         : {0}", tag.UrlSlug);
+		Console.WriteLine("Description        : {0}",tag.Description);
+		Console.WriteLine("PostCount       : {0}",tag.PostCount);
+		Console.WriteLine("".PadRight(80, '-'));
+
+	}
 }
+else
+{
+	Console.WriteLine("Không tìm thấy thẻ!");
+}
+

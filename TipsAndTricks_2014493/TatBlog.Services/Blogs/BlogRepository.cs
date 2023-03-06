@@ -136,7 +136,7 @@ namespace TatBlog.Services.Blogs
 				.Where(x => x.UrlSlug == slug)
 				.FirstOrDefaultAsync(cancellationToken);
 		}
-		public async Task<IList<TagItem>> GetAllTagAsync( CancellationToken cancellationToken = default)
+		public async Task<IList<TagItem>> GetAllTagAsync(CancellationToken cancellationToken = default)
 		{
 			IQueryable<Tag> tags = _context.Set<Tag>();
 			return await tags
@@ -149,7 +149,31 @@ namespace TatBlog.Services.Blogs
 					Description = x.Description,
 					PostCount = x.Posts.Count(p => p.Published)
 				}).ToListAsync(cancellationToken);
+		}
+		//Xoá 1 thẻ theo mã cho trước 
+		public class NotFountException : Exception 
+		{
+			public NotFountException(string entityName, int entityId)
+				:base($"Entity '{entityName} with ID '{entityId}' was not found.")
+			{
 
+			}
+			
+		}
+		public Task DeleteTag(int id, CancellationToken cancellationToken = default)
+		{
+			var TagDelete = _context.Set<Tag>().SingleOrDefault(x => x.Id == id);
+			if (TagDelete != null)
+			{
+				_context.Tags.Remove(TagDelete);
+				_context.SaveChanges();
+				Console.WriteLine("Xoa the thanh cong");
+			}
+			else
+			{
+				Console.WriteLine("khong tim thay the de xoa");
+			}
+			return Task.CompletedTask;
 
 		}
 
