@@ -211,6 +211,22 @@ namespace TatBlog.Services.Blogs
 			Console.WriteLine("".PadRight(80, '-'));
 			await _context.SaveChangesAsync(cancellationToken);
 		}
+		//Xóa một chuyên mục theo mã số cho trước. 
+		public async Task DeleteCategory(int id, CancellationToken cancellationToken = default)
+		{
+			var categoryDelete = _context.Set<Category>().SingleOrDefault(x => x.Id == id);
+			if (categoryDelete != null)
+			{
+				_context.Categories.Remove(categoryDelete);
+				await _context.SaveChangesAsync(cancellationToken);
+				Console.WriteLine("Xoa the thanh cong");
+			}
+			else
+			{
+				Console.WriteLine("khong tim thay the de xoa");
+			}
+			
+		}
 
 	}
 }

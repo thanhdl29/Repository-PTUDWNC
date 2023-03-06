@@ -135,16 +135,40 @@ Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}", "ID", "Name", "UrlSl
 Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}", findById.Id, findById.Name, findById.UrlSlug, findById.Description, findById.PostCount);*/
 
 //Thêm hoặc cập nhật một chuyên mục/chủ đề. 
-Console.WriteLine("Nhap thong tin chuyen muc can them: \n");
-Console.Write("Name: ");
-string categoryName = Console.ReadLine().Trim();
-Console.Write("UrlSlug: ");
-string categoryUrlSlug = Console.ReadLine().Trim();
-Console.Write("Description: ");
-string categoryDescription = Console.ReadLine().Trim();
-blogRepo.AddCategory(categoryName, categoryUrlSlug, categoryDescription);
+//Console.WriteLine("Nhap thong tin chuyen muc can them: \n");
+//Console.Write("Name: ");
+//string categoryName = Console.ReadLine().Trim();
+//Console.Write("UrlSlug: ");
+//string categoryUrlSlug = Console.ReadLine().Trim();
+//Console.Write("Description: ");
+//string categoryDescription = Console.ReadLine().Trim();
+//blogRepo.AddCategory(categoryName, categoryUrlSlug, categoryDescription);
+//var category = context.Categories
+//	.OrderBy(x => x.Id)
+//	.Select(x => new
+//	{
+//		Id = x.Id,
+//		Name = x.Name,
+//		UrlSlug = x.UrlSlug,
+//		Description = x.Description,
+//		PostCount = x.Posts.Count()
+//	}).ToList();
+//Console.WriteLine("Danh sach chuyen mucj hien tai: ");
+//foreach(var item in category)
+//{
+//	Console.WriteLine("ID           : {0}", item.Id);
+//	Console.WriteLine("Name        : {0}", item.Name);
+//	Console.WriteLine("UrlSlug         : {0}", item.UrlSlug);
+//	Console.WriteLine("Description        : {0}", item.Description);
+//	Console.WriteLine("PostCount       : {0}", item.PostCount);
+//	Console.WriteLine("".PadRight(80, '-'));
+//}
+//Xóa một chuyên mục theo mã số cho trước. 
+Console.WriteLine("Nhap ma chuyen muc can xoa: ");
+int nhap = Convert.ToInt32(Console.ReadLine());
+blogRepo.DeleteCategory(nhap);
 var category = context.Categories
-	.OrderBy(x => x.Id)
+	.OrderBy(x => x.Name)
 	.Select(x => new
 	{
 		Id = x.Id,
@@ -153,15 +177,23 @@ var category = context.Categories
 		Description = x.Description,
 		PostCount = x.Posts.Count()
 	}).ToList();
-Console.WriteLine("Danh sach chuyen mucj hien tai: ");
-foreach(var item in category)
+if (category.Count > 0)
 {
-	Console.WriteLine("ID           : {0}", item.Id);
-	Console.WriteLine("Name        : {0}", item.Name);
-	Console.WriteLine("UrlSlug         : {0}", item.UrlSlug);
-	Console.WriteLine("Description        : {0}", item.Description);
-	Console.WriteLine("PostCount       : {0}", item.PostCount);
-	Console.WriteLine("".PadRight(80, '-'));
+	Console.WriteLine("Danh sách thẻ còn lại: ");
+	foreach (var item in category )
+	{
+		Console.WriteLine("ID           : {0}", item.Id);
+		Console.WriteLine("Name        : {0}", item.Name);
+		Console.WriteLine("UrlSlug         : {0}", item.UrlSlug);
+		Console.WriteLine("Description        : {0}", item.Description);
+		Console.WriteLine("PostCount       : {0}", item.PostCount);
+		Console.WriteLine("".PadRight(80, '-'));
+
+	}
+}
+else
+{
+	Console.WriteLine("Không tìm thấy thẻ!");
 }
 
 

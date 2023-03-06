@@ -42,5 +42,7 @@ namespace TatBlog.Services.Blogs
 		Task<CategoryItem> FundCategoryByIdAsync(int id, CancellationToken cancellationToken = default);
 		//Thêm hoặc cập nhật một chuyên mục/chủ đề. 
 		Task AddCategory(string name, string urlslug, string description, CancellationToken cancellationToken = default);
+		//Xóa một chuyên mục theo mã số cho trước. 
+		Task DeleteCategory(int id, CancellationToken cancellationToken = default);
 	}
 }
