@@ -88,7 +88,7 @@ foreach(var item in tags)
 	Console.WriteLine("{0,5}{1,-50}{2,10}", item.Id, item.Name, item.PostCount);
 }*/
 //Xoá 1 thẻ theo mã cho trước
-Console.WriteLine("Nhap ma the can xoa: ");
+/*Console.WriteLine("Nhap ma the can xoa: ");
 int nhap = Convert.ToInt32(Console.ReadLine());
 var TagDelete = blogRepo.DeleteTag(nhap);
 var tags = context.Tags
@@ -118,5 +118,16 @@ if(tags.Count > 0)
 else
 {
 	Console.WriteLine("Không tìm thấy thẻ!");
-}
+}*/
+//Tìm một chuyên mục (Category) theo tên định danh (slug). 
+/*string slug = "Google";
+var category = await blogRepo.FundTagBySlugAsync(slug);
+Console.WriteLine("{0,-5}{1,-20}{2,-30}", "ID", "Name", "Description");
+Console.WriteLine("{0,-5}{1,-20}{2,-30}", category.Id, category.Name, category.Description);*/
+//Tìm một chuyên mục theo mã số cho trước
+Console.WriteLine("Nhap ma so chuyen muc can tim: ");
+int nhapMs = Convert.ToInt32(Console.ReadLine());
+var findById = await blogRepo.FundCategoryByIdAsync(nhapMs);
+Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}", "ID", "Name", "UrlSlug", "Description", "PostCount");
+Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}", findById.Id, findById.Name, findById.UrlSlug, findById.Description, findById.PostCount);
 

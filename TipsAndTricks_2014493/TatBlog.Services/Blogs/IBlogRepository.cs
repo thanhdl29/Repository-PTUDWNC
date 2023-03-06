@@ -36,6 +36,10 @@ namespace TatBlog.Services.Blogs
 		Task<Tag> FundTagBySlugAsync(string slug, CancellationToken cancellationToken = default);
 		Task<IList<TagItem>> GetAllTagAsync(CancellationToken cancellationToken = default);
 		Task DeleteTag(int id,CancellationToken cancellationToken = default);
-		
+		//Tìm một chuyên mục (Category) theo tên định danh (slug). 
+		Task<Category> FundCategoryBySlugAsync(string slug, CancellationToken cancellationToken = default);
+		//Tìm một chuyên mục theo mã số cho trước
+		Task<CategoryItem> FundCategoryByIdAsync(int id, CancellationToken cancellationToken = default);
+
 	}
 }

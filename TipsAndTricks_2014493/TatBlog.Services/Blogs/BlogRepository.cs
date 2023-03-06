@@ -176,6 +176,27 @@ namespace TatBlog.Services.Blogs
 			return Task.CompletedTask;
 
 		}
+		//Tìm một chuyên mục (Category) theo tên định danh (slug). 
+		public async Task<Category> FundCategoryBySlugAsync(string slug, CancellationToken cancellationToken = default)
+		{
+			return await _context.Set<Category>()
+				.Where(x => x.UrlSlug == slug)
+				.FirstOrDefaultAsync(cancellationToken);
+		}
+		//Tìm một chuyên mục theo mã số cho trước
+		public async Task<CategoryItem> FundCategoryByIdAsync(int id, CancellationToken cancellationToken = default)
+		{
+			return await _context.Set<Category>()
+				.Where(x => x.Id == id)
+				.Select(x => new CategoryItem()
+				{
+					Id = x.Id,
+					Name = x.Name,
+					UrlSlug = x.UrlSlug,
+					Description = x.Description,
+					PostCount = x.Posts.Count(x => x.Published)
+				}).FirstOrDefaultAsync(cancellationToken);
+		}
 
 	}
 }
