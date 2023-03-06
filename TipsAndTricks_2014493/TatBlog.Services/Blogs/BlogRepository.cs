@@ -197,6 +197,20 @@ namespace TatBlog.Services.Blogs
 					PostCount = x.Posts.Count(x => x.Published)
 				}).FirstOrDefaultAsync(cancellationToken);
 		}
+		//Thêm hoặc cập nhật một chuyên mục/chủ đề. 
+		  public async Task AddCategory(string name, string urlslug, string description, CancellationToken cancellationToken = default)
+		{
+			_context.Categories.Add(new Category()
+			{
+				Name = name,
+				UrlSlug = urlslug,
+				Description = description,
+				ShowOnMenu = true
+			});
+			Console.WriteLine("Them chuyen muc thanh cong!\n");
+			Console.WriteLine("".PadRight(80, '-'));
+			await _context.SaveChangesAsync(cancellationToken);
+		}
 
 	}
 }
