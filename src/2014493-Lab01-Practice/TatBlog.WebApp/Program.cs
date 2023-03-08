@@ -14,7 +14,7 @@ var app = builder.Build();
 	}
 	else 
 	{ 
-		app.UseExceptionHandler("/Blog/Error");
+		app.UseExceptionHandler("~/Blog/Error");
 		// Thêm middleware cho việc áp dụng HSTS (thêm header
 		// Strict-Transport-Security vào HTTP Response).
 		app.UseHsts();
