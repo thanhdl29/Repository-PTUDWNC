@@ -16,14 +16,25 @@ namespace TatBlog.Data.Contexts
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Tag> Tags { get; set; }
 		
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		/*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer(@"Server=THANH;Database=TatBlog;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=true");
+			//optionsBuilder.UseSqlServer(@"Server=THANH;Database=TatBlog;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=true");
 
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(CategoryMap).Assembly);
+		}*/
+		public BlogDbContext(DbContextOptions<BlogDbContext> options)
+			: base(options)
+		{
+
+		}
+
+		public override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.ApplyConfigurationsFromAssembly(
+				typeof(CategoryMap).Assembly );
 		}
 	}
 }
