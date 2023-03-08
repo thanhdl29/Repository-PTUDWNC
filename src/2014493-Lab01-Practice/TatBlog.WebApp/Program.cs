@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-
+﻿
 var builder = WebApplication.CreateBuilder(args);
 {
 	//Thêm các dịc vụ yêu cầu bởi MVC Framework

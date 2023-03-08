@@ -7,6 +7,7 @@ using TatBlog.WinApp;
 using TatBlog.Core.DTO;
 using TatBlog.Core.Entities;
 using Azure;
+using TatBlog.Core.Contracts;
 
 // Tạo đối tuọngh DbContext để quản lý phiên làm việc
 // Với CSDL và trạng thái của các đối tuọng 
@@ -164,7 +165,7 @@ Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}", findById.Id, findByI
 //	Console.WriteLine("".PadRight(80, '-'));
 //}
 //Xóa một chuyên mục theo mã số cho trước. 
-Console.WriteLine("Nhap ma chuyen muc can xoa: ");
+/*Console.WriteLine("Nhap ma chuyen muc can xoa: ");
 int nhap = Convert.ToInt32(Console.ReadLine());
 blogRepo.DeleteCategory(nhap);
 var category = context.Categories
@@ -194,6 +195,36 @@ if (category.Count > 0)
 else
 {
 	Console.WriteLine("Không tìm thấy thẻ!");
+}*/
+
+//Kiểm tra tên định danh (slug) của một chuyên mục đã tồn tại hay chưa
+/*Console.WriteLine("Nhap ten dinh danh chuyen muc can kiem tra: ");
+string slug = Console.ReadLine();
+if (await blogRepo.CheckSlug(slug))
+{
+	Console.WriteLine("Ten dinh danh chuyen muc da ton tai.");
+}
+else
+{
+	Console.WriteLine("Ten dinh danh chuyen muc khong ton tai");
+}*/
+
+//Lấy và phân trang danh sách chuyên mục, kết quả trả về kiểu IPagedList<CategoryItem>
+//Tạo đối tượng phân trang
+var pagingParams = new PagingParams
+{
+	PageNumber = 1,
+	PageSize = 10,
+	SortColumn = "Id",
+	SortOrder = "ASC"
+
+};
+var categoryItem = await blogRepo.GetPagedCategoriesAsync(pagingParams);
+Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}", "ID", "Name", "UrlSlug", "Description", "PostCount");
+foreach (var category in categoryItem)
+{
+	Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}",
+		category.Id, category.Name, category.UrlSlug, category.Description, category.PostCount);
 }
 
 

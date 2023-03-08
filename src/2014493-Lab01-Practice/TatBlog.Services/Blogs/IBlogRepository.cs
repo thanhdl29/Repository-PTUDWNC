@@ -44,5 +44,9 @@ namespace TatBlog.Services.Blogs
 		Task AddCategory(string name, string urlslug, string description, CancellationToken cancellationToken = default);
 		//Xóa một chuyên mục theo mã số cho trước. 
 		Task DeleteCategory(int id, CancellationToken cancellationToken = default);
+		//Kiểm tra tên định danh (slug) của một chuyên mục đã tồn tại hay chưa
+		Task<bool> CheckSlug(string slug, CancellationToken cancellationToken = default);
+		//Lấy và phân trang danh sách chuyên mục, kết quả trả về kiểu IPagedList<CategoryItem>
+		Task<IPagedList<CategoryItem>> GetPagedCategoriesAsync(IPagingParams pagingParams, CancellationToken cancellationToken = default);
 	}
 }

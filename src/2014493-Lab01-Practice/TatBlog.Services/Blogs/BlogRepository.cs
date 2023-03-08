@@ -227,6 +227,28 @@ namespace TatBlog.Services.Blogs
 			}
 			
 		}
+		//Kiểm tra tên định danh (slug) của một chuyên mục đã tồn tại hay chưa
+		public async Task<bool> CheckSlug(string slug,
+			CancellationToken cancellationToken = default)
+		{
+			return await _context.Set<Category>()
+				.AnyAsync(x => x.UrlSlug == slug, cancellationToken);
+		}
 
+		//Lấy và phân trang danh sách chuyên mục, kết quả trả về kiểu IPagedList<CategoryItem>
+		public async Task<IPagedList<CategoryItem>> GetPagedCategoriesAsync(IPagingParams pagingParams, CancellationToken cancellationToken = default)
+		{
+			var categoryQuuery = _context.Set<Category>()
+				.Select(x => new CategoryItem()
+				{
+					Id = x.Id,
+					Name = x.Name,
+					UrlSlug = x.UrlSlug,
+					Description = x.Description,
+					ShowOnMenu = true,
+					PostCount = x.Posts.Count(p => p.Published)
+				});
+			return await categoryQuuery.ToPagedListAsync(pagingParams, cancellationToken);
+		}
 	}
 }
