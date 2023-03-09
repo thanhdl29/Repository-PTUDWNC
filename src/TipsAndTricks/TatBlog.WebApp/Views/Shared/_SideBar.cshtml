@@ -1,5 +1,8 @@
 ﻿<div class="my-4">
 	<partial name="_SearchForm" />
+
+	<!--Các chuyên mục chủ đề-->
+	@await Component.InvokeAsync("CategoriesWidget")
 	<!--Form tìm kiếm-->
 	<h1>
 		Tìm kiếm bài viết
