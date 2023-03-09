@@ -40,16 +40,16 @@ namespace TatBlog.Services.Extensions
 				totalCount);
 		}
 		public static async	Task<IPagedList<T>> ToPagedListAsync<T>(
-			this IQueryable<T> sosurce,
+			this IQueryable<T> source,
 			int pageNumber = 1,
 			int pageSize = 10,
 			string sortColumn = "Id",
 			string sortOrder = "DESC",
 			CancellationToken cancellationToken = default)
 		{
-			var totalCount = await sosurce.CountAsync(cancellationToken);
-			var items = await sosurce
-				.OrderBy($"{sortColumn}{sortOrder}")
+			var totalCount = await source.CountAsync(cancellationToken);
+			var items = await source
+				.OrderBy($"{sortColumn} {sortOrder}")
 				.Skip((pageNumber - 1)* pageSize)
 				.Take(pageSize)
 				.ToListAsync(cancellationToken);

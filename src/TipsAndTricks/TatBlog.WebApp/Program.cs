@@ -46,6 +46,7 @@ using TatBlog.Services.Blogs;
 var builder = WebApplication.CreateBuilder(args);
 {
 	builder.Services.AddControllersWithViews();
+	builder.Services.AddResponseCompression();
 	builder.Services.AddDbContext<BlogDbContext>(options => 
 		options.UseSqlServer(
 			builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -56,19 +57,21 @@ var app = builder.Build();
 {
 	if (app.Environment.IsDevelopment())
 	{
-		app.UseDeveloperExceptionPage();
+		//app.UseDeveloperExceptionPage();
 	}
 	else 
 	{
 		app.UseExceptionHandler("/Blog/Error");
 		app.UseHsts();
 	}
+
 	app.UseHttpsRedirection();
 	app.UseStaticFiles();
 	app.UseRouting();
 	app.MapControllerRoute(
 		name: "default",
-		pattern: "{controller = Blog}/{action = Index}/{id?}");
+		pattern: "{controller=Blog}/{action=Index}/{id?}"
+		);
 
 }
 using(var scope = app.Services.CreateScope())

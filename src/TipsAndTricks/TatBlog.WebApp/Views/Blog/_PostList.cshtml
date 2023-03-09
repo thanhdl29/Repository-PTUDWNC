@@ -1,7 +1,7 @@
 ﻿@model Post
 @{
 	var imageUrl = string.IsNullOrWhiteSpace(Model.ImageUrl)
-				? "/imges/image_1.jpg"
+				? "/images/image_1.jpg"
 				: $"/{Model.ImageUrl}";
 }
 <article class="blog-entry mb-4">
