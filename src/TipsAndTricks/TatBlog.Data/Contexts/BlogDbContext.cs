@@ -31,10 +31,14 @@ namespace TatBlog.Data.Contexts
 
 		}
 
-		public override void OnModelCreating(ModelBuilder modelBuilder)
+		public BlogDbContext()
+		{
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(
-				typeof(CategoryMap).Assembly );
+				typeof(CategoryMap).Assembly);
 		}
 	}
 }

@@ -48,5 +48,16 @@ namespace TatBlog.Services.Blogs
 		Task<bool> CheckSlug(string slug, CancellationToken cancellationToken = default);
 		//Lấy và phân trang danh sách chuyên mục, kết quả trả về kiểu IPagedList<CategoryItem>
 		Task<IPagedList<CategoryItem>> GetPagedCategoriesAsync(IPagingParams pagingParams, CancellationToken cancellationToken = default);
+		//Tìm và phân trang các bài viết thỏa mãn điều kiện tìm kiếm được cho trong 
+		//đối tượng PostQuery(kết quả trả về kiểu IPagedList<Post>)
+
+		/*Task<IList<Post>> FindPostByPostQueryAsync(PostQuery postQuery, IPagingParams pagingParams,
+		CancellationToken cancellationToken = default);*/
+
+		Task<IPagedList<Post>> GetPagedPostsAsync(
+			PostQuery condition,
+			int pageNumber = 1,
+			int pageSize = 10,
+			CancellationToken cancellationToken = default);
 	}
 }

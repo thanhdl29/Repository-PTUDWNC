@@ -211,7 +211,7 @@ else
 
 //Lấy và phân trang danh sách chuyên mục, kết quả trả về kiểu IPagedList<CategoryItem>
 //Tạo đối tượng phân trang
-var pagingParams = new PagingParams
+/*var pagingParams = new PagingParams
 {
 	PageNumber = 1,
 	PageSize = 10,
@@ -225,7 +225,7 @@ foreach (var category in categoryItem)
 {
 	Console.WriteLine("{0,-5} {1,-20} {2,-30} {3,-20} {4,-30}",
 		category.Id, category.Name, category.UrlSlug, category.Description, category.PostCount);
-}
+}*/
 
 
 

@@ -250,5 +250,84 @@ namespace TatBlog.Services.Blogs
 				});
 			return await categoryQuuery.ToPagedListAsync(pagingParams, cancellationToken);
 		}
+		//cau s	Tìm và phân trang các bài viết thỏa mãn điều kiện tìm kiếm được cho trong 
+		//đối tượng PostQuery(kết quả trả về kiểu IPagedList<Post>)
+
+		private IQueryable<Post> FilterPosts(PostQuery condition)
+		{
+			IQueryable<Post> posts = _context.Set<Post>()
+				.Include(x => x.Category)
+				.Include(x => x.Author)
+				.Include(x => x.Tags);
+			if (condition.Publishedonly)
+			{
+				posts = posts.Where(x => x.Published);
+			}
+			if (condition.NotPublished)
+			{
+				posts =posts.Where(x => !x.Published);
+			}
+			if (condition.CategoryId > 0)
+			{
+				posts = posts.Where(x => x.CategoryId == condition.CategoryId);
+			}
+
+			if (!string.IsNullOrWhiteSpace(condition.CategorySlug))
+			{
+				posts = posts.Where(x => x.Category.UrlSlug == condition.CategorySlug);
+			}
+
+			if (condition.AuthorId > 0)
+			{
+				posts = posts.Where(x => x.AuthorId == condition.AuthorId);
+			}
+
+			if (!string.IsNullOrWhiteSpace(condition.AuthorSlug))
+			{
+				posts = posts.Where(x => x.Author.UrlSlug == condition.AuthorSlug);
+			}
+
+			if (!string.IsNullOrWhiteSpace(condition.TagSlug))
+			{
+				posts = posts.Where(x => x.Tags.Any(t => t.UrlSlug == condition.TagSlug));
+			}
+
+			if (!string.IsNullOrWhiteSpace(condition.KeyWord))
+			{
+				posts = posts.Where(x => x.Title.Contains(condition.KeyWord) ||
+										 x.ShortDescription.Contains(condition.KeyWord) ||
+										 x.Description.Contains(condition.KeyWord) ||
+										 x.Category.Name.Contains(condition.KeyWord) ||
+										 x.Tags.Any(t => t.Name.Contains(condition.KeyWord)));
+			}
+
+			if (condition.Year > 0)
+			{
+				posts = posts.Where(x => x.PostedDate.Year == condition.Year);
+			}
+
+			if (condition.Month > 0)
+			{
+				posts = posts.Where(x => x.PostedDate.Month == condition.Month);
+			}
+
+			if (!string.IsNullOrWhiteSpace(condition.TitleSlug))
+			{
+				posts = posts.Where(x => x.UrlSlug == condition.TitleSlug);
+			}
+
+			return posts;
+		}
+		public async Task<IPagedList<Post>> GetPagedPostsAsync(
+			PostQuery condition,
+			int pageNumber = 1,
+			int pageSize = 10,
+			CancellationToken cancellationToken = default)
+		{
+			return await FilterPosts(condition).ToPagedListAsync(
+				pageNumber, pageSize,
+				nameof(Post.PostedDate), "DESC" ,cancellationToken);
+		}
 	}
+	
 }
