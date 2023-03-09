@@ -292,13 +292,13 @@ namespace TatBlog.Services.Blogs
 				posts = posts.Where(x => x.Tags.Any(t => t.UrlSlug == condition.TagSlug));
 			}
 
-			if (!string.IsNullOrWhiteSpace(condition.KeyWord))
+			if (!string.IsNullOrWhiteSpace(condition.Keyword))
 			{
-				posts = posts.Where(x => x.Title.Contains(condition.KeyWord) ||
-										 x.ShortDescription.Contains(condition.KeyWord) ||
-										 x.Description.Contains(condition.KeyWord) ||
-										 x.Category.Name.Contains(condition.KeyWord) ||
-										 x.Tags.Any(t => t.Name.Contains(condition.KeyWord)));
+				posts = posts.Where(x => x.Title.Contains(condition.Keyword) ||
+										 x.ShortDescription.Contains(condition.Keyword) ||
+										 x.Description.Contains(condition.Keyword) ||
+										 x.Category.Name.Contains(condition.Keyword) ||
+										 x.Tags.Any(t => t.Name.Contains(condition.Keyword)));
 			}
 
 			if (condition.Year > 0)

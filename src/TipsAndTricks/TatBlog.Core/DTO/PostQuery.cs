@@ -19,7 +19,7 @@ namespace TatBlog.Core.DTO
 		public bool Publishedonly { get; set; }
 		public bool NotPublished { get; set; }
 		public string Tag { get; set; }
-		public string KeyWord { get; set; }
+		public string Keyword { get; set; }
 
 	}
 }

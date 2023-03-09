@@ -14,12 +14,14 @@ namespace TatBlog.WebApp.Controllers
 		}
 
 		public async Task<IActionResult> Index(
+			[FromQuery(Name ="k")] string keywork = null,
 			[FromQuery(Name = "p")] int pageNumber = 1,
 			[FromQuery(Name = "ps")] int pageSize = 10)
 		{
 			var postQuery = new PostQuery()
 			{
-				Publishedonly = true
+				Publishedonly = true,
+				Keyword = keywork
 			};
 			var postsList = await _blogRepository
 				.GetPagedPostsAsync(postQuery, pageNumber, pageSize);

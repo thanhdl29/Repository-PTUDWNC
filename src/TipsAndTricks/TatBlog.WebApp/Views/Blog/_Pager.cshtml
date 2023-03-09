@@ -25,7 +25,7 @@
 			<a asp-controller="Blog"
 				asp-action="@actionName"
 				asp-route-slug="@slug"
-				asp-route-k="@postQuery.KeyWord"
+				asp-route-k="@postQuery.Keyword"
 				asp-route-p="@(Model.PageNumber - 1)"
 				asp-route-ps="@Model.PageSize"
 				class="btn btn-info">
@@ -49,7 +49,7 @@
 			<a asp-controller="Blog"
 			asp-action="@actionName"
 			asp-route-slug="@slug"
-			asp-route-k="@postQuery.KeyWord"
+			asp-route-k="@postQuery.Keyword"
 			asp-route-p="@(Model.PageNumber + 1)"
 			asp-route-ps="@Model.PageSize"
 			class="btn btn-info">
