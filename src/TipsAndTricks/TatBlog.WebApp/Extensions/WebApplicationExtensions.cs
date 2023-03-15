@@ -2,6 +2,7 @@
 using TatBlog.Data.Contexts;
 using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
+using TatBlog.Services.Media;
 
 namespace TatBlog.WebApp.Extensions
 {
@@ -14,7 +15,7 @@ namespace TatBlog.WebApp.Extensions
 			builder.Services.AddResponseCompression();
 			return builder;
 		}
-
+		//Đăng ký các dịch vụ với DI Container
 		public static WebApplicationBuilder ConfigureServices(
 			this WebApplicationBuilder buider)
 		{
@@ -24,6 +25,7 @@ namespace TatBlog.WebApp.Extensions
 						.GetConnectionString("DefaultConnection")));
 			buider.Services.AddScoped<IBlogRepository, BlogRepository>();
 			buider.Services.AddScoped<IDataSeeder, DataSeeder>();
+			buider.Services.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
 			return buider;
 		}
 		public static WebApplication UseRequestPipeline(
@@ -62,6 +64,8 @@ namespace TatBlog.WebApp.Extensions
 			}
 			return app;
 		}
+		
+
 	}
 	
 }

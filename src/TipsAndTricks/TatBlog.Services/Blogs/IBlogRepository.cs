@@ -59,5 +59,20 @@ namespace TatBlog.Services.Blogs
 			int pageNumber = 1,
 			int pageSize = 10,
 			CancellationToken cancellationToken = default);
+		Task<IList<AuthorItem>> GetAuthorsAsync(CancellationToken cancellationToken = default);
+
+		//Task<IPagedList<Post>> GetPagedPostsAsync(PostQuery condition,int pageNumber = 1,int pageSize = 10, CancellationToken cancellationToken = default);
+		/*Task<IPagedList<T>> GetPagedPostsAsync<T>(
+		PostQuery condition,
+		IPagingParams pagingParams,
+		Func<IQueryable<Post>, IQueryable<T>> mapper);*/
+		Task<Post> GetPostByIdAsync(
+		int postId, bool includeDetails = false,
+		CancellationToken cancellationToken = default);
+		Task<Post> CreateOrUpdatePostAsync(
+		Post post, IEnumerable<string> tags,
+		CancellationToken cancellationToken = default);
+		Task<Tag> GetTagAsync(
+		string slug, CancellationToken cancellationToken = default);
 	}
 }

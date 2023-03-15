@@ -21,5 +21,6 @@ namespace TatBlog.Core.DTO
 		public string Tag { get; set; }
 		public string Keyword { get; set; }
 
+
 	}
 }
