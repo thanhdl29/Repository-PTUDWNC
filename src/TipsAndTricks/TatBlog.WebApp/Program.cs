@@ -6,6 +6,9 @@ using TatBlog.Services.Blogs;
 using TatBlog.WebApp.Extensions;
 using TatBlog.WebApp.Mapsters;
 using TatBlog.WebApp.Validations;
+using NLog.Web;
+using NLog;
+
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -19,8 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 	builder
 		.ConfigureMvc()
 		.ConfigureServices()
+		.ConfigureNlog()
 		.configureMapster()
 		.ConfigureFluentValidation();
+
 }
 var app = builder.Build();
 {
@@ -70,4 +75,5 @@ var app = builder.Build();
 	var seeder = scope.ServiceProvider.GetRequiredService<IDataSeeder>();
 	seeder.Initialize();
 }*/
+
 app.Run();

@@ -14,16 +14,19 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 	public class PostsController : Controller
 	{
 	
+		private readonly ILogger<PostsController> _logger;
 		private readonly IBlogRepository _blogRepository;
 		private readonly IMapper _mapper;
 		private readonly IMediaManager _mediaManager;
 		public PostsController(IBlogRepository blogRepository, 
 			IMapper mapper,
+			ILogger<PostsController> logger,
 			IMediaManager mediaManager)
 		{
 			_blogRepository = blogRepository;
 			_mapper = mapper;
 			_mediaManager = mediaManager;
+			_logger = logger;
 		}
 
 		public async Task PoulatePostFilterModelAsync(PostFilterModel model)
@@ -53,9 +56,13 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 				Year = model.Year,
 				Month = model.Month
 			};*/
+			_logger.LogInformation("Tạo điều kiện truy vấn");
 			var postQuery = _mapper.Map<PostQuery>(model);
+			_logger.LogInformation("Lấy danh sách bài viết từ CSDL");
 			ViewBag.PostsList = await _blogRepository
 				.GetPagedPostsAsync(postQuery, 1, 10);
+
+			_logger.LogInformation("Chuẩn bị dữ liệu cho ViewModel");
 
 			await PoulatePostFilterModelAsync(model);
 			return View(model);
@@ -95,7 +102,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 		}
 		[HttpPost]
 		public async Task<IActionResult> Edit(/*PostEditModel model*/
-			IValidator<PostEditModel> postValidator,
+			[FromServices] IValidator<PostEditModel> postValidator,
 			PostEditModel model)
 		{
 			var validationResult = await postValidator.ValidateAsync(model);
@@ -119,7 +126,6 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 				post.Id = 0;
 				post.PostedDate = DateTime.Now;
 			}
-
 			else
 			{
 				_mapper.Map(model, post);
@@ -140,7 +146,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 				if(!string.IsNullOrWhiteSpace(newImagePath))
 				{
 					await _mediaManager.DeleteFileAsync(post.ImageUrl);
-					post.ImageUrl = newImagePath;
+					post.ImageUrl= newImagePath;
 
 				}
 			}

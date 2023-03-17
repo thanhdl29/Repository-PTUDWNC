@@ -28,8 +28,8 @@ namespace TatBlog.WebApp.Areas.Admin.Models
 
 		public string Meta { get; set; }
 		[DisplayName("Slug")]
-		[Remote("VerifyPostSlug", "Pots","Admin",
-			HttpMethod ="POST", AdditionalFields ="Id")]
+		//[Remote("VerifyPostSlug", "Pots","Admin",
+		//	HttpMethod ="POST", AdditionalFields ="Id")]
 		
 
 		public string UrlSlug { get; set; }

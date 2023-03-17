@@ -155,6 +155,150 @@ namespace TatBlog.Data.Seeders
 					{
 						tags[0]
 					}
+				},
+				new()
+				{
+					Title = "ASP.NE",
+					ShortDescription = "David and eps",
+					Description = "Here's afew great mples",
+					Meta = "David and epository filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "ASP.ET",
+					ShortDescription = "Davi and epos",
+					Description = "Here's afew great mples",
+					Meta = "David and epository filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "ASP.NT",
+					ShortDescription = "David and epos",
+					Description = "Here's afew great mples",
+					Meta = "David and epostory filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "SP.NET",
+					ShortDescription = "David and epos",
+					Description = "Here's afew great mples",
+					Meta = "David and eposiory filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "AS.NET",
+					ShortDescription = "David and epos",
+					Description = "Here's afew great mples",
+					Meta = "David and epositoy filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "AP.NET",
+					ShortDescription = "David and epos",
+					Description = "Here's afew great mples",
+					Meta = "David and epositry filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "ASP.N",
+					ShortDescription = "David and epos",
+					Description = "Here's afew great mples",
+					Meta = "David and eository filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
+				},
+				new()
+				{
+					Title = "P.NET",
+					ShortDescription = "David and epos",
+					Description = "Here's aew great mples",
+					Meta = "David and epository filled",
+					UrlSlug = "Aspnetcenarios",
+					Published = true,
+					PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
+					ModifiedDate = null,
+					ViewCount = 10,
+					Author = authors[0],
+					Category = categories[0],
+					Tags = new List<Tag>()
+					{
+						tags[0]
+					}
 				}
 			};
 			_dbContext.AddRange(posts);

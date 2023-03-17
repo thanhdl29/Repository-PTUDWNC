@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 using TatBlog.Data.Contexts;
 using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
 using TatBlog.Services.Media;
+using TatBlog.WebApp.Middlewares;
 
 namespace TatBlog.WebApp.Extensions
 {
@@ -13,10 +15,19 @@ namespace TatBlog.WebApp.Extensions
 		{
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddResponseCompression();
+			
+			
 			return builder;
 		}
-		//Đăng ký các dịch vụ với DI Container
-		public static WebApplicationBuilder ConfigureServices(
+		public static WebApplicationBuilder ConfigureNlog(
+            this WebApplicationBuilder builder)
+		{
+            builder.Logging.ClearProviders();
+            builder.Host.UseNLog();
+			return builder;
+        }
+        //Đăng ký các dịch vụ với DI Container
+        public static WebApplicationBuilder ConfigureServices(
 			this WebApplicationBuilder buider)
 		{
 			buider.Services.AddDbContext<BlogDbContext>(options =>
@@ -62,8 +73,11 @@ namespace TatBlog.WebApp.Extensions
 					.GetRequiredService<ILogger<Program>>()
 					.LogError(ex , "Could not insert data into database");
 			}
+			app.UseRouting();
+			app.UseMiddleware<UserActivityMiddleware>();
 			return app;
 		}
+		
 		
 
 	}
