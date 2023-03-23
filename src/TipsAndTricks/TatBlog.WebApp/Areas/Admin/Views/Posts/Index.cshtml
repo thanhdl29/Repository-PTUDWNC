@@ -47,7 +47,15 @@
 						@(post.Published ? "Có" : "Không")
 					</td>*@
 					<td>
-						<button type="button" class="btn btn-dark">@(post.Published ? "Có" : "Không")</button>
+						<a asp-area="Admin"
+						   asp-controller="Posts"
+						   asp-action="ChangePublishStatus"
+						   asp-route-id="@post.Id"
+						   class="btn btn-secondary">
+							@(post.Published ? "Có" : "Không")
+						</a>
+						
+						
 					</td>	
 						
 				</tr>

@@ -167,16 +167,11 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 				? Json($"Slug '{urlSlug}' đã được sủ dụng")
 				: Json(true);
 		}
-		[HttpPost]
-		public async Task<IActionResult> ChangePublishStatus(int postId)
+		public async Task<IActionResult> ChangePublishStatus(int id)
 		{
-			var post = await _blogRepository.GetPostByIdAsync(postId);
-			if (post != null)
-			{
-				post.Published = !post.Published;
-				await _blogRepository.UpdatePostAsync(post);
-			}
-			return RedirectToAction("Index");
+			await _blogRepository.UpdatePostAsync(id);
+			
+			return RedirectToAction(nameof( Index));
 		}
 
 	}

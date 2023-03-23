@@ -443,10 +443,12 @@ namespace TatBlog.Services.Blogs
 			return await _context.Set<Tag>()
 				.FirstOrDefaultAsync(x => x.UrlSlug == slug, cancellationToken);
 		}
-		public async Task UpdatePostAsync(Post post, CancellationToken cancellationToken = default)
+		public async Task UpdatePostAsync(int id, CancellationToken cancellationToken = default)
 		{
-			_context.Posts.Update(post);
-			await _context.SaveChangesAsync();
+			var post = await _context.Set<Post>().FindAsync(id);
+
+			post.Published = !post.Published;
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 
 	}
