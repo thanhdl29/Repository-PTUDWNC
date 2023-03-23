@@ -43,9 +43,13 @@
 					<td>
 						@post.Category.Name
 					</td>
-					<td>
+					@*<td>
 						@(post.Published ? "Có" : "Không")
-					</td>
+					</td>*@
+					<td>
+						<button type="button" class="btn btn-dark">@(post.Published ? "Có" : "Không")</button>
+					</td>	
+						
 				</tr>
 			}
 		</tbody>

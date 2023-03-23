@@ -74,5 +74,6 @@ namespace TatBlog.Services.Blogs
 		CancellationToken cancellationToken = default);
 		Task<Tag> GetTagAsync(
 		string slug, CancellationToken cancellationToken = default);
+		Task UpdatePostAsync(Post post, CancellationToken cancellationToken = default);
 	}
 }

@@ -13,12 +13,12 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 {
 	public class PostsController : Controller
 	{
-	
+
 		private readonly ILogger<PostsController> _logger;
 		private readonly IBlogRepository _blogRepository;
 		private readonly IMapper _mapper;
 		private readonly IMediaManager _mediaManager;
-		public PostsController(IBlogRepository blogRepository, 
+		public PostsController(IBlogRepository blogRepository,
 			IMapper mapper,
 			ILogger<PostsController> logger,
 			IMediaManager mediaManager)
@@ -48,7 +48,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 		}
 		public async Task<IActionResult> Index(PostFilterModel model,
 			 int pageNumber = 1,
-			 int pageSize = 10) 
+			 int pageSize = 10)
 		{
 			/*var postQuery = new PostQuery()
 			{
@@ -92,8 +92,8 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 		{
 			//Id = 0 <=> Thêm bài viết mới
 			//ID >0 : Đọc dữ liệu ccuar bài viết từ CSDL
-			var post = id >0
-				?await _blogRepository.GetPostByIdAsync(id, true) : null;
+			var post = id > 0
+				? await _blogRepository.GetPostByIdAsync(id, true) : null;
 			//Tạo view model từ dữ liệu của bài viết
 			var model = post == null
 				? new PostEditModel()
@@ -117,7 +117,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 				await PopulatePostEditModelAsync(model);
 				return View(model);
 			}
-			var post = model.Id >0
+			var post = model.Id > 0
 				? await _blogRepository.GetPostByIdAsync(model.Id)
 				: null;
 
@@ -135,7 +135,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 				post.ModifiedDate = DateTime.Now;
 			}
 			//Nếu người dùng có upload hình ảnh minh hoạ cho bài viết
-			if (model.ImageFile?.Length>0)
+			if (model.ImageFile?.Length > 0)
 			{
 				//Thì thực hiện việc lưu tập tin vào thư mục upload
 
@@ -145,10 +145,10 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 					model.ImageFile.ContentType);
 
 				//Nếu lưu thành công, xoá tập tin hình ảnh cũ nếu có
-				if(!string.IsNullOrWhiteSpace(newImagePath))
+				if (!string.IsNullOrWhiteSpace(newImagePath))
 				{
 					await _mediaManager.DeleteFileAsync(post.ImageUrl);
-					post.ImageUrl= newImagePath;
+					post.ImageUrl = newImagePath;
 
 				}
 			}
@@ -166,6 +166,17 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 			return slugExisted
 				? Json($"Slug '{urlSlug}' đã được sủ dụng")
 				: Json(true);
+		}
+		[HttpPost]
+		public async Task<IActionResult> ChangePublishStatus(int postId)
+		{
+			var post = await _blogRepository.GetPostByIdAsync(postId);
+			if (post != null)
+			{
+				post.Published = !post.Published;
+				await _blogRepository.UpdatePostAsync(post);
+			}
+			return RedirectToAction("Index");
 		}
 
 	}
