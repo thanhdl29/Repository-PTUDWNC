@@ -171,8 +171,28 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 		{
 			await _blogRepository.UpdatePostAsync(id);
 			
-			return RedirectToAction(nameof( Index));
+			return RedirectToAction(nameof(Index));
+		}
+		public async Task<IActionResult> DeletePosts(int id)
+		{
+			await _blogRepository.DeletePost(id);
+			return RedirectToAction(nameof(Index));
 		}
 
+		//public async Task<IActionResult>  Delete(int id)
+		//{
+		//	//// Tìm bài viết theo id
+		//	//var post = db.Posts.Find(id);
+
+		//	//// Xóa bài viết khỏi cơ sở dữ liệu
+		//	//db.Posts.Remove(post);
+		//	//db.SaveChanges();
+
+		//	//// Trả về kết quả thành công
+		//	//return Json(new { success = true });
+		//	await _blogRepository.(id);
+
+		//	return RedirectToAction(nameof(Index));
+		//}
 	}
 }
