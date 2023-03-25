@@ -67,5 +67,24 @@
 			Thêm mới
 		</a>
 	</div>
+	<div class="col-auto">
+		<a asp-area="Admin"
+		   asp-controller="Posts"
+		   onclick="ResetPost"
+			class="btn btn-info">
+			Bỏ lọc
+		</a>
+	</div>
 
 </form>
+@section Scripts {
+	<script>
+		function ResetPost() {
+			// Reset giá trị của các ô input và select
+			$('input[type="text"], select').val('');
+			$('select').prop('selectedIndex', 0);
+			// Tải lại trang để xóa các điều kiện tìm kiếm
+			location.reload();
+		}
+	</script>
+}
