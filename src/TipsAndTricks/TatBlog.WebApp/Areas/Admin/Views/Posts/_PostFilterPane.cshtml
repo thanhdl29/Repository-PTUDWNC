@@ -46,9 +46,17 @@
 				asp-for="Month"
 				asp-items="Model.MonthList">
 			<option value="" selected>--Chọn tháng--</option>
-
 		</select>
 	</div>
+
+	<div class="col-auto">
+        <label class="visually-hidden" 
+			asp-for="NotPublished"
+		action="">Chưa xuất bản</label>
+        <input type="checkbox" 
+            asp-for="NotPublished"/>
+            Chưa xuất bản
+    </div>
 
 	<div class="col-auto">
 		<button type="submit" class="btn btn-primary">Tìm/Lọc</button>

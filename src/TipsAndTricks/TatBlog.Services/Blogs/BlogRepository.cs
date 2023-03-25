@@ -266,7 +266,7 @@ namespace TatBlog.Services.Blogs
 			}
 			if (condition.NotPublished)
 			{
-				posts =posts.Where(x => !x.Published);
+				posts = posts.Where(x => !x.Published);
 			}
 			if (condition.CategoryId > 0)
 			{

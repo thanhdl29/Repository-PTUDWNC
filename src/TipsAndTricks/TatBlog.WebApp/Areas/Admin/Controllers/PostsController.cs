@@ -88,6 +88,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> Edit(int id = 0)
 		{
 			//Id = 0 <=> Thêm bài viết mới

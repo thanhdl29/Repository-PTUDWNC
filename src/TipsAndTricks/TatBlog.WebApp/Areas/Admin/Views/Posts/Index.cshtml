@@ -90,22 +90,3 @@ else
 	</h1>
 }
 <partial name="_Pager" model="postsList" />
-
-
-<!-- Các phần khác của view... -->
-
-
-
-@*@section Scripts {
-    <script>
-		function DeletePosts(postId) {
-            if (confirm('Bạn có thực sự muốn xóa bài viết này không?')) {
-                // Gọi AJAX đến phương thức hành động phía máy chủ để xóa bài viết
-                $.post('@Url.Action("Delete")', { id: postId }, function () {
-                    // Tải lại trang sau khi đã thành công
-                    location.reload();
-                });
-            }
-        }
-    </script>
-}*@
