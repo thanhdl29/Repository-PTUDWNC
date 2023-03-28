@@ -18,13 +18,14 @@
 			<div class="col-md-8">
 				<div class="card-body">
 					<h5 class="card-title">
+						@Model.Title
 						<a asp-controller="Blog"
 							asp-action="Post"
 						   asp-route-year="@Model.PostedDate.Year"
 						   asp-route-month="@Model.PostedDate.Month"
 						   asp-route-day="@Model.PostedDate.Day"
 						   asp-route-slug="@Model.UrlSlug"
-							class="text-decoration-none text-dark"
+							class="text-decoration-none"
 							title="@Model.Title">
 
 							@Model.Title
@@ -38,7 +39,7 @@
 						<span class="text-primary">
 							<a asp-controller="Blog"
 								asp-action="Author"
-								asp-route-slug="@Model.UrlSlug"
+								asp-route-slug="@Model.Author.UrlSlug"
 								class="text-decoration-none"
 								title="@Model.Author.FullName">
 								@Model.Author.FullName

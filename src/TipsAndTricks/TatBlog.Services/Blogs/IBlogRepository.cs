@@ -11,9 +11,11 @@ namespace TatBlog.Services.Blogs
 {
 	public interface IBlogRepository
 	{
+		//Tìm bài viết có định danh là slug và được đăng vào Day, month, year
 		Task<Post> GetPostAsync(
 			int year,
 			int mounth,
+			int day,
 			string slug,
 			CancellationToken cancellationToken = default);
 		Task<IList<Post>> GetPopularArticlesAsync(
@@ -69,11 +71,25 @@ namespace TatBlog.Services.Blogs
 		Task<Post> GetPostByIdAsync(
 		int postId, bool includeDetails = false,
 		CancellationToken cancellationToken = default);
+		//2.1 lab02
+		Task<IPagedList<Post>> GetPostByQuery(PostQuery query,
+			int pageNimber = 1,
+			int pageSize = 10,
+			CancellationToken cancellationToken = default);
+		//
 		Task<Post> CreateOrUpdatePostAsync(
 		Post post, IEnumerable<string> tags,
 		CancellationToken cancellationToken = default);
+		// Tìm 1 thẻ tag theo tên định danh slug
 		Task<Tag> GetTagAsync(
 		string slug, CancellationToken cancellationToken = default);
+		Task<IList<TagItem>> GetTagsAsync(CancellationToken cancellationToken = default);
+		Task<Post> GetPostBySlugAsync(
+			string slug, bool published = false,
+			CancellationToken cancellationToken = default);
+
+
+
 		Task DeletePost(int id, CancellationToken cancellation = default);
 		Task UpdatePostAsync(int id, CancellationToken cancellationToken = default);
 	}

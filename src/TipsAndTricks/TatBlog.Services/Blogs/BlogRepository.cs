@@ -24,13 +24,15 @@ namespace TatBlog.Services.Blogs
 		public async Task<Post> GetPostAsync(
 			int year,
 			int mouth,
+			int day,
 			string slug,
 			CancellationToken cancellationToken = default) 
 		{
 			/*throw new NotImplementedException();*/
 			IQueryable<Post> postsQuery = _context.Set<Post>()
 				.Include(x => x.Category)
-				.Include(x => x.Author);
+				.Include(x => x.Author)
+				.Include(x => x.Tags);
 			if (year >0)
 			{
 				postsQuery = postsQuery.Where(x => x.PostedDate.Year == year);
@@ -38,6 +40,10 @@ namespace TatBlog.Services.Blogs
 			if (mouth > 0)
 			{
 				postsQuery = postsQuery.Where(x => x.PostedDate.Month == mouth);
+			}
+			if (day > 0)
+			{
+				postsQuery = postsQuery.Where(x => x.PostedDate.Day == day);
 			}
 			if (!string.IsNullOrWhiteSpace(slug))
 			{
@@ -56,6 +62,7 @@ namespace TatBlog.Services.Blogs
 				.Take(numPosts)
 				.ToListAsync(cancellationToken);
 		}
+		
 
 		public async Task<bool> IsPostSlugExistedAsync(
 			int postId,
@@ -436,12 +443,55 @@ namespace TatBlog.Services.Blogs
 
 			return post;
 		}
+
+		//2.1 Lab02 
+		public async Task<IPagedList<Post>> GetPostByQuery(PostQuery query,
+			int pageNimber = 1, 
+			int pageSize = 10,
+			CancellationToken cancellationToken = default)
+		{
+			return await FilterPosts(query).ToPagedListAsync(pageNimber, pageSize);
+		}
 		
+		//Tìm 1 thẻ tag theo tên định danh slug
 		public async Task<Tag> GetTagAsync(
 		string slug, CancellationToken cancellationToken = default)
 		{
 			return await _context.Set<Tag>()
-				.FirstOrDefaultAsync(x => x.UrlSlug == slug, cancellationToken);
+				.Where(x => x.UrlSlug == slug)
+				.Where(x => x.UrlSlug.Contains(slug))
+				.FirstOrDefaultAsync(cancellationToken);
+		}
+		public async Task<IList<TagItem>> GetTagsAsync(CancellationToken cancellationToken = default)
+		{
+			IQueryable<Tag> tag = _context.Set<Tag>();
+			return await tag
+				.OrderBy(x => x.Name)
+				.Select(x => new TagItem()
+				{
+					Id = x.Id,
+					Name = x.Name,
+					UrlSlug = x.UrlSlug,
+					Description = x.Description,
+					PostCount = x.Posts.Count(p => p.Published)
+				}).ToListAsync(cancellationToken);
+		}
+		//
+		public async Task<Post> GetPostBySlugAsync(
+			string slug, bool published=false,
+			CancellationToken cancellationToken = default)
+		{
+			if (!published)
+			{
+				return await _context.Set<Post>().FindAsync(slug);
+
+			}
+			return await _context.Set<Post>()
+				.Include(x => x.Category)
+				.Include(x => x.Author)
+				.Include(x => x.Tags)
+				.FirstOrDefaultAsync(x => x.UrlSlug == slug,cancellationToken);
+
 		}
 		//1.2 lab03
 		public async Task UpdatePostAsync(int id, CancellationToken cancellationToken = default)
