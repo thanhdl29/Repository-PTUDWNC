@@ -336,7 +336,7 @@ namespace TatBlog.Services.Blogs
 				pageNumber, pageSize,
 				nameof(Post.PostedDate), "DESC" ,cancellationToken);
 		}
-		public async Task<IList<AuthorItem>> GetAuthorsAsync(CancellationToken cancellationToken = default)
+		/*public async Task<IList<AuthorItem>> GetAuthorsAsync(CancellationToken cancellationToken = default)
 		{
 			return await _context.Set<Author>()
 				.OrderBy(a => a.FullName)
@@ -352,7 +352,7 @@ namespace TatBlog.Services.Blogs
 					PostCount = a.Posts.Count(p => p.Published)
 				})
 				.ToListAsync(cancellationToken);
-		}
+		}*/
 		/*public async Task<IPagedList<Post>> GetPagedPostsAsync(
 		PostQuery condition,
 		int pageNumber = 1,

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using TatBlog.Core.Contracts;
 using TatBlog.Core.DTO;
+using System.Linq;
 using TatBlog.Core.Entities;
 using TatBlog.Data.Contexts;
 using TatBlog.Services.Extensions;
@@ -79,7 +80,9 @@ public class AuthorRepository : IAuthorRepository
 	{
 		return await _context.Set<Author>()
 			.AsNoTracking()
-			.WhereIf(!string.IsNullOrWhiteSpace(name), 
+			//.Where(!string.IsNullOrWhiteSpace(name), 
+				//x => x.FullName.Contains(name))
+			.Where(
 				x => x.FullName.Contains(name))
 			.Select(a => new AuthorItem()
 			{

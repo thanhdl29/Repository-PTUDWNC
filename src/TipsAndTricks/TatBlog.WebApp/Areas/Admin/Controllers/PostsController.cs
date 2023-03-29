@@ -16,10 +16,12 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 
 		private readonly ILogger<PostsController> _logger;
 		private readonly IBlogRepository _blogRepository;
+		private readonly IAuthorRepository _authorRepository;
 		private readonly IMapper _mapper;
 		private readonly IMediaManager _mediaManager;
 		public PostsController(IBlogRepository blogRepository,
 			IMapper mapper,
+			IAuthorRepository authorRepository,
 			ILogger<PostsController> logger,
 			IMediaManager mediaManager)
 		{
@@ -27,11 +29,12 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 			_mapper = mapper;
 			_mediaManager = mediaManager;
 			_logger = logger;
+			_authorRepository = authorRepository;
 		}
 
 		public async Task PoulatePostFilterModelAsync(PostFilterModel model)
 		{
-			var authors = await _blogRepository.GetAuthorsAsync();
+			var authors = await _authorRepository.GetAuthorsAsync();
 			var categories = await _blogRepository.GetCategoriesAsync();
 
 			model.AuthorList = authors.Select(a => new SelectListItem()
@@ -72,7 +75,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
 
 		public async Task PopulatePostEditModelAsync(PostEditModel model)
 		{
-			var authors = await _blogRepository.GetAuthorsAsync();
+			var authors = await _authorRepository.GetAuthorsAsync();
 			var categories = await _blogRepository.GetCategoriesAsync();
 
 			model.AuthorList = authors.Select(a => new SelectListItem()
