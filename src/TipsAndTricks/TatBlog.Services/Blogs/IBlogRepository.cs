@@ -92,5 +92,9 @@ namespace TatBlog.Services.Blogs
 
 		Task DeletePost(int id, CancellationToken cancellation = default);
 		Task UpdatePostAsync(int id, CancellationToken cancellationToken = default);
+		Task<IPagedList<T>> GetPagedPostsAsync<T>(
+		PostQuery condition,
+		IPagingParams pagingParams,
+		Func<IQueryable<Post>, IQueryable<T>> mapper);
 	}
 }

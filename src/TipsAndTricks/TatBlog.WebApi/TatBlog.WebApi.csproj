@@ -22,9 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Endpoints\" />
-    <Folder Include="Filters\" />
-    <Folder Include="Mapster\" />
-    <Folder Include="Validation\" />
     <Folder Include="wwwroot\uploads\pictures\" />
   </ItemGroup>
 

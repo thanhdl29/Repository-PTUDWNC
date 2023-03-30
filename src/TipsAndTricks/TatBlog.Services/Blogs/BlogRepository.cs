@@ -508,6 +508,16 @@ namespace TatBlog.Services.Blogs
 			_context.Posts.Remove(postDelete);
 			await _context.SaveChangesAsync();
 		}
+		public async Task<IPagedList<T>> GetPagedPostsAsync<T>(
+		PostQuery condition,
+		IPagingParams pagingParams,
+		Func<IQueryable<Post>, IQueryable<T>> mapper)
+		{
+			var posts = FilterPosts(condition);
+			var projectedPosts = mapper(posts);
+
+			return await projectedPosts.ToPagedListAsync(pagingParams);
+		}
 
 	}
 

@@ -78,7 +78,9 @@ public class AuthorRepository : IAuthorRepository
 		string name = null,
 		CancellationToken cancellationToken = default)
 	{
-		return await _context.Set<Author>()
+		if (!string.IsNullOrWhiteSpace(name))
+		{
+			return await _context.Set<Author>()
 			.AsNoTracking()
 			//.Where(!string.IsNullOrWhiteSpace(name), 
 				//x => x.FullName.Contains(name))
@@ -95,6 +97,12 @@ public class AuthorRepository : IAuthorRepository
 				PostCount = a.Posts.Count(p => p.Published)
 			})
 			.ToPagedListAsync(pagingParams, cancellationToken);
+		}
+		else
+		{
+			return null; ;
+		}
+		
 	}
 
 	public async Task<IPagedList<T>> GetPagedAuthorsAsync<T>(
