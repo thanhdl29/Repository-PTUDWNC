@@ -6,7 +6,7 @@ namespace TatBlog.WebApi.Models
 	public class ApiResponse
 	{
 		public bool IsSuccess => Errors.Count == 0;
-		public HttpStatusCode StatusCode { get; set; }
+		public HttpStatusCode StatusCode { get; init; }
 		public IList<string> Errors { get; init; }
 		
 		protected ApiResponse()

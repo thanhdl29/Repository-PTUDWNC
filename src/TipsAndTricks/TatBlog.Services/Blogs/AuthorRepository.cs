@@ -100,7 +100,7 @@ public class AuthorRepository : IAuthorRepository
 		}
 		else
 		{
-			return null; ;
+			return null;
 		}
 		
 	}
